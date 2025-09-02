@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪吃蛇游戏</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 主菜单界面 -->
+    <div id="menu-screen" class="screen active">
+        <div class="menu-container">
+            <h1 class="game-title">贪吃蛇</h1>
+            <div class="menu-buttons">
+                <button id="start-btn" class="menu-btn primary">开始游戏</button>
+                <button id="difficulty-btn" class="menu-btn">难度选择</button>
+                <button id="controls-btn" class="menu-btn">操作说明</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 难度选择界面 -->
+    <div id="difficulty-screen" class="screen">
+        <div class="menu-container">
+            <h2 class="screen-title">选择难度</h2>
+            <div class="difficulty-options">
+                <button class="difficulty-btn" data-level="easy">
+                    <h3>简单</h3>
+                    <p>无障碍物，适合新手</p>
+                </button>
+                <button class="difficulty-btn" data-level="medium">
+                    <h3>中等</h3>
+                    <p>少量障碍物</p>
+                </button>
+                <button class="difficulty-btn" data-level="hard">
+                    <h3>困难</h3>
+                    <p>大量障碍物，挑战极限</p>
+                </button>
+            </div>
+            <button id="back-to-menu" class="menu-btn">返回主菜单</button>
+        </div>
+    </div>
+
+    <!-- 操作说明界面 -->
+    <div id="controls-screen" class="screen">
+        <div class="menu-container">
+            <h2 class="screen-title">操作说明</h2>
+            <div class="controls-info">
+                <div class="control-item">
+                    <h3>移动控制</h3>
+                    <p>方向键 ↑↓←→ 或 WASD 键</p>
+                </div>
+                <div class="control-item">
+                    <h3>游戏目标</h3>
+                    <p>吃掉食物让蛇变长，避免撞墙或撞到自己</p>
+                </div>
+                <div class="control-item">
+                    <h3>特殊食物</h3>
+                    <p>🍎 普通食物：增长1节</p>
+                    <p>⚡ 加速食物：临时提升速度</p>
+                    <p>🌟 成长食物：增长2节</p>
+                    <p>💎 特殊食物：增长3节</p>
+                </div>
+            </div>
+            <button id="back-to-menu-2" class="menu-btn">返回主菜单</button>
+        </div>
+    </div>
+
+    <!-- 游戏界面 -->
+    <div id="game-screen" class="screen">
+        <div class="game-container">
+            <!-- 游戏信息栏 -->
+            <div class="game-info">
+                <div class="info-item">
+                    <span class="info-label">得分:</span>
+                    <span id="score">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">长度:</span>
+                    <span id="length">1</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">难度:</span>
+                    <span id="current-difficulty">简单</span>
+                </div>
+                <div class="info-item">
+                    <button id="pause-btn" class="control-btn">暂停</button>
+                    <button id="restart-btn" class="control-btn">重新开始</button>
+                </div>
+            </div>
+
+            <!-- 游戏画布 -->
+            <div class="canvas-container">
+                <canvas id="game-canvas" width="500" height="500"></canvas>
+                <div id="game-overlay" class="overlay hidden">
+                    <div class="overlay-content">
+                        <h2 id="overlay-title">游戏暂停</h2>
+                        <p id="overlay-message">按空格键继续游戏</p>
+                        <div class="overlay-buttons">
+                            <button id="resume-btn" class="overlay-btn">继续游戏</button>
+                            <button id="menu-btn" class="overlay-btn">返回菜单</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 特殊效果提示 -->
+            <div id="effect-indicator" class="effect-indicator hidden">
+                <span id="effect-text"></span>
+                <div id="effect-timer" class="effect-timer"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- JavaScript 文件 -->
+    <script src="game.js"></script>
+</body>
+</html>
