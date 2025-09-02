@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Coding 成果展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: white;
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .header {
+            padding: 40px 0 40px 0;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            background: #4285f4;
+            position: relative;
+        }
+
+        .github-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .github-icon:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+            color: white;
+        }
+
+        .github-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .header h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 35px;
+            padding: 10px 0;
+        }
+
+        .game-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 30px 50px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            border-color: #dee2e6;
+        }
+
+        .game-icon {
+            width: 60px;
+            height: 60px;
+            background: #d1dfeb;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .game-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .game-description {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            min-height: 80px;
+        }
+
+        .play-button {
+            background: #1a7de7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.2s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .play-button:hover {
+            background: #0056b3;
+        }
+
+        .game-card .play-button {
+            pointer-events: none;
+        }
+
+        .activity-info {
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .activity-info p {
+            margin: 10px 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 50px 0 20px 0;
+            color: white;
+        }
+
+        .section-title h2 {
+            color: #333;
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .footer {
+            background: rgba(23, 34, 83, 0.3);
+            padding: 15px;
+            border-radius: 20px;
+            margin-top: 50px;
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-content h3 {
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        .footer-content h4 {
+            font-size: 1.2rem;
+            margin: 10px 0 20px 0;
+        }
+
+        .footer-content p {
+            margin: 10px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .copyright {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .github-icon {
+                top: 15px;
+                right: 15px;
+                width: 35px;
+                height: 35px;
+            }
+
+            .github-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .activity-info {
+                padding: 15px;
+            }
+
+            .activity-info p {
+                font-size: 0.9rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .games-grid,
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .game-card {
+                padding: 20px;
+            }
+
+            .footer {
+                padding: 30px 15px;
+            }
+
+            .footer-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .tool-tag {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="https://github.com/FDUCSLG" class="github-icon" target="_blank" title="访问GitHub仓库">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <h1>Vibe Coding 作品展示</h1>
+        </div>
+
+        <div class="section-title">
+            <h2>🎮 互动游戏</h2>
+            <p>经典游戏的现代化实现</p>
+        </div>
+        <div class="games-grid">
+            <a href="2048/index.html" class="game-card">
+                <div class="game-icon icon-puzzle">🧩</div>
+                <div class="game-title">2048</div>
+                <div class="game-description">经典数字合成游戏，通过滑动合并相同数字，挑战最高分数</div>
+                <div class="play-button">开始游戏</div>
+            </a>
+
+            <a href="Teris/index.html" class="game-card">
+                <div class="game-icon icon-blocks">🧱</div>
+                <div class="game-title">俄罗斯方块</div>
+                <div class="game-description">永恒的经典游戏，旋转和移动方块，消除完整的行</div>
+                <div class="play-button">开始游戏</div>
+            </a>
+
+
+
+            <a href="dinosaur-game/index.html" class="game-card">
+                <div class="game-icon icon-dino">🦕</div>
+                <div class="game-title">恐龙游戏</div>
+                <div class="game-description">Chrome浏览器经典离线游戏，控制小恐龙跳跃避开障碍物</div>
+                <div class="play-button">开始游戏</div>
+            </a>
+
+            <a href="guess-number/guess_number_game.html" class="game-card">
+                <div class="game-icon icon-number">🔢</div>
+                <div class="game-title">猜数字</div>
+                <div class="game-description">经典的数字猜测游戏，根据提示猜出正确的数字</div>
+                <div class="play-button">开始游戏</div>
+            </a>
+
+            <a href="maze/index.html" class="game-card">
+                <div class="game-icon icon-maze">🌀</div>
+                <div class="game-title">迷宫</div>
+                <div class="game-description">挑战你的方向感，在复杂的迷宫中找到出口</div>
+                <div class="play-button">开始游戏</div>
+            </a>
+
+            <a href="minesweeper/index.html" class="game-card">
+                <div class="game-icon icon-mine">💣</div>
+                <div class="game-title">扫雷</div>
+                <div class="game-description">经典的逻辑推理游戏，小心避开地雷，找出所有安全区域</div>
+                <div class="play-button">开始游戏</div>
+            </a>
+
+            <a href="multi-armed-bandit/index.html" class="game-card">
+                <div class="game-icon icon-slot">🎰</div>
+                <div class="game-title">多臂老虎机</div>
+                <div class="game-description">试试你的运气，拉动老虎机臂膀，看看能否中大奖</div>
+                <div class="play-button">开始游戏</div>
+            </a>
+
+            <a href="pacman/index.html" class="game-card">
+                <div class="game-icon icon-pacman">👻</div>
+                <div class="game-title">吃豆人</div>
+                <div class="game-description">经典街机游戏，控制吃豆人收集豆子，避开幽灵的追捕</div>
+                <div class="play-button">开始游戏</div>
+            </a>
+
+            <a href="snake/index.html" class="game-card">
+                <div class="game-icon icon-snake">🐍</div>
+                <div class="game-title">贪吃蛇</div>
+                <div class="game-description">经典的贪吃蛇游戏，控制蛇吃食物长大，小心不要撞到自己</div>
+                <div class="play-button">开始游戏</div>
+            </a>
+
+            <a href="spider-solitaire/index.html" class="game-card">
+                <div class="game-icon icon-cards">🃏</div>
+                <div class="game-title">蜘蛛纸牌</div>
+                <div class="game-description">经典的单人纸牌游戏，按花色和顺序整理所有卡牌</div>
+                <div class="play-button">开始游戏</div>
+            </a>
+
+            <a href="two-player-tank-battle/index.html" class="game-card">
+                <div class="game-icon icon-tank">🚗</div>
+                <div class="game-title">双人坦克大战</div>
+                <div class="game-description">经典的双人对战游戏，控制坦克与朋友一起战斗</div>
+                <div class="play-button">开始游戏</div>
+            </a>
+        </div>
+
+        <div class="section-title">
+            <h2>🛠️ 实用工具</h2>
+            <p>日常使用的便捷工具</p>
+        </div>
+        <div class="tools-grid">
+            <a href="countdown/countdown.html" class="game-card">
+                <div class="game-icon icon-time">⏰</div>
+                <div class="game-title">倒计时</div>
+                <div class="game-description">实用的倒计时工具，帮助你管理时间和提醒重要事件</div>
+                <div class="play-button">开始使用</div>
+            </a>
+            <a href="Q&A/index.html" class="game-card">
+                <div class="game-icon icon-question">❓</div>
+                <div class="game-title">答题</div>
+                <div class="game-description">计算机基础知识问答</div>
+                <div class="play-button">开始答题</div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <div class="footer-content">
+                <p>所有项目均使用现代化 AI IDE，如 Trae AI 编程助手等协作完成</p>
+                <p class="copyright">© 2025 FDUCSLG</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
