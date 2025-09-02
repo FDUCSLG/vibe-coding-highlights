@@ -1,0 +1,765 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: #000;
+    color: #fff;
+    overflow-x: auto;
+    min-height: 100vh;
+}
+
+/* 赌场背景 */
+.casino-background {
+    background: linear-gradient(135deg, #1a0033 0%, #330066 50%, #1a0033 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.casino-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(255, 255, 0, 0.05) 0%, transparent 50%);
+    animation: backgroundPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundPulse {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.7; }
+}
+
+/* 霓虹灯装饰 */
+.neon-lights {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(90deg, 
+        #ff0080 0%, #00ff80 25%, #8000ff 50%, #ff8000 75%, #ff0080 100%);
+    animation: neonFlow 3s linear infinite;
+}
+
+@keyframes neonFlow {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+}
+
+/* 游戏容器 */
+.game-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* 赌场标题 */
+.casino-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.neon-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 
+        0 0 5px #ff0080,
+        0 0 10px #ff0080,
+        0 0 15px #ff0080,
+        0 0 20px #ff0080;
+    animation: neonGlow 2s ease-in-out infinite alternate;
+    margin-bottom: 20px;
+}
+
+@keyframes neonGlow {
+    0% {
+        text-shadow: 
+            0 0 5px #ff0080,
+            0 0 10px #ff0080,
+            0 0 15px #ff0080,
+            0 0 20px #ff0080;
+    }
+    100% {
+        text-shadow: 
+            0 0 10px #ff0080,
+            0 0 20px #ff0080,
+            0 0 30px #ff0080,
+            0 0 40px #ff0080;
+    }
+}
+
+/* 余额显示 */
+.balance-display {
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    border: 2px solid #ffd700;
+    border-radius: 15px;
+    padding: 15px 30px;
+    display: inline-block;
+    box-shadow: 
+        0 0 20px rgba(255, 215, 0, 0.3),
+        inset 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.coin-counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.coin-icon {
+    font-size: 2rem;
+    animation: coinSpin 3s linear infinite;
+}
+
+@keyframes coinSpin {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+.balance-text {
+    color: #ffd700;
+    text-shadow: 0 0 10px #ffd700;
+}
+
+.balance-number {
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+    min-width: 60px;
+    text-align: right;
+}
+
+/* 老虎机容器 */
+.slot-machines {
+    display: flex;
+    justify-content: center;
+    gap: clamp(15px, 3vw, 30px);
+    flex-wrap: wrap;
+    margin: 40px 0;
+    padding: 0 20px;
+}
+
+/* 单个老虎机 */
+.slot-machine {
+    width: 100%;
+    max-width: 400px;
+    min-width: 280px;
+    position: relative;
+    flex: 1;
+}
+
+.machine-frame {
+    background: linear-gradient(145deg, #4a4a4a, #2a2a2a);
+    border: clamp(2px, 0.4vw, 3px) solid #666;
+    border-radius: clamp(15px, 2.5vw, 20px);
+    padding: clamp(15px, 3vw, 20px);
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        inset 0 2px 10px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.machine-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+    animation: metalShine 3s linear infinite;
+}
+
+@keyframes metalShine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* 机器顶部 */
+.machine-top {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.neon-sign {
+    background: linear-gradient(145deg, #ff6b6b, #ee5a24);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    box-shadow: 
+        0 0 20px rgba(255, 107, 107, 0.6),
+        inset 0 2px 5px rgba(255, 255, 255, 0.3);
+    animation: signPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes signPulse {
+    0% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.6), inset 0 2px 5px rgba(255, 255, 255, 0.3); }
+    100% { box-shadow: 0 0 30px rgba(255, 107, 107, 0.9), inset 0 2px 5px rgba(255, 255, 255, 0.3); }
+}
+
+.jackpot-lights {
+    height: 10px;
+    background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+    background-size: 200% 100%;
+    border-radius: 5px;
+    margin-top: 10px;
+    animation: lightChase 1s linear infinite;
+}
+
+@keyframes lightChase {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+}
+
+/* 老虎机窗口 */
+.slot-window {
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    border: clamp(2px, 0.5vw, 4px) solid #ffd700;
+    border-radius: clamp(10px, 2vw, 15px);
+    padding: clamp(10px, 3vw, 20px);
+    margin-bottom: clamp(10px, 2vw, 20px);
+    box-shadow: 
+        0 0 30px rgba(255, 215, 0, 0.4),
+        inset 0 0 20px rgba(0, 0, 0, 0.8);
+    width: 100%;
+}
+
+.reels-container {
+    display: flex;
+    justify-content: center;
+    gap: clamp(5px, 1.5vw, 10px);
+    width: 100%;
+}
+
+.reel-wrapper {
+    background: linear-gradient(145deg, #333, #111);
+    border: clamp(1px, 0.3vw, 2px) solid #666;
+    border-radius: clamp(5px, 1.5vw, 10px);
+    padding: clamp(3px, 0.8vw, 5px);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+    flex: 1;
+    width:33%;
+}
+
+.reel {
+    width: 100%;
+    height: clamp(80px, 15vw, 120px);
+    aspect-ratio: 2/3;
+    background: linear-gradient(145deg, #fff, #f0f0f0);
+    border: clamp(1px, 0.3vw, 2px) solid #ccc;
+    border-radius: clamp(5px, 1vw, 8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-weight: bold;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 
+        inset 0 2px 5px rgba(255, 255, 255, 0.8),
+        inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.symbol-strip {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.1s ease;
+}
+
+/* 机器底部控制面板 */
+.machine-bottom {
+    text-align: center;
+}
+
+.control-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: clamp(10px, 2vw, 15px);
+    padding: 0 clamp(10px, 3vw, 20px);
+    gap: clamp(10px, 2vw, 20px);
+}
+
+/* 旋转按钮 */
+.spin-btn {
+    position: relative;
+    padding: clamp(8px, 2vw, 15px) clamp(15px, 4vw, 30px);
+    font-size: clamp(0.8rem, 2vw, 1.3rem);
+    font-weight: 700;
+    background: linear-gradient(145deg, #ff6b6b, #ee5a24);
+    color: #fff;
+    border: none;
+    border-radius: clamp(25px, 5vw, 50px);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: clamp(1px, 0.3vw, 2px);
+    box-shadow: 
+        0 5px 15px rgba(255, 107, 107, 0.4),
+        inset 0 2px 5px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.spin-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 25px rgba(255, 107, 107, 0.6),
+        inset 0 2px 5px rgba(255, 255, 255, 0.3);
+}
+
+.spin-btn:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 3px 10px rgba(255, 107, 107, 0.4),
+        inset 0 2px 5px rgba(255, 255, 255, 0.3);
+}
+
+.spin-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.spin-btn:hover .btn-glow {
+    left: 100%;
+}
+
+/* 拉杆 */
+.lever-container {
+    position: relative;
+}
+
+.lever {
+    width: clamp(40px, 8vw, 60px);
+    height: clamp(60px, 10vw, 80px);
+    position: relative;
+    cursor: pointer;
+}
+
+.lever-base {
+    width: clamp(15px, 3vw, 20px);
+    height: 75%;
+    background: linear-gradient(145deg, #666, #333);
+    border-radius: clamp(5px, 1.5vw, 10px);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.2);
+}
+
+.lever-handle {
+    width: clamp(30px, 6vw, 40px);
+    height: clamp(30px, 6vw, 40px);
+    background: linear-gradient(145deg, #ffd700, #ffb700);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 
+        0 3px 10px rgba(255, 215, 0, 0.4),
+        inset 0 2px 5px rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+}
+
+.lever:hover .lever-handle {
+    transform: translateX(-50%) translateY(10px);
+    box-shadow: 
+        0 1px 5px rgba(255, 215, 0, 0.4),
+        inset 0 2px 5px rgba(255, 255, 255, 0.6);
+}
+
+/* 结果显示 */
+.result-display {
+    min-height: 80px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffd700;
+    text-shadow: 0 0 10px #ffd700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+/* 信息面板 */
+.info-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto 0;
+    gap: 30px;
+}
+
+.paytable-container,
+.rules-container {
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    border: 2px solid #ffd700;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 
+        0 0 20px rgba(255, 215, 0, 0.2),
+        inset 0 2px 5px rgba(255, 255, 255, 0.1);
+    width: 100%;
+}
+
+.paytable-title,
+.rules-title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffd700;
+    text-shadow: 0 0 10px #ffd700;
+    margin-bottom: 15px;
+}
+
+.paytable {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+}
+
+.pay-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    border-left: 3px solid #ffd700;
+    transition: all 0.3s ease;
+    min-width: 0;
+}
+
+.pay-row:hover {
+    background: rgba(255, 215, 0, 0.2);
+    transform: translateX(5px);
+}
+
+.pay-row.special {
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.2), rgba(255, 140, 0, 0.2));
+    border-left-color: #ff8c00;
+    font-weight: bold;
+    animation: specialGlow 2s ease-in-out infinite alternate;
+}
+
+.pay-separator {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ffd700, transparent);
+    margin: 10px 0;
+    border-radius: 1px;
+}
+
+.symbols {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.payout {
+    color: #ffd700;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+@keyframes specialGlow {
+    0% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.3); }
+    100% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.6); }
+}
+
+.rules {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 2px solid #00ff88;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    line-height: 1.8;
+}
+
+.rules p {
+    margin: 0;
+    color: #ffffff;
+    line-height: 1.6;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    border-left: 3px solid #00ff88;
+}
+
+.rules p:hover {
+    color: #00ff88;
+}
+
+.rules strong {
+    color: #ffd700;
+    text-shadow: 0 0 3px rgba(255, 215, 0, 0.5);
+}
+
+/* 旋转动画 */
+@keyframes reelSpin {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-400px); }
+}
+
+@keyframes reelSpinSlow {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-200px); }
+}
+
+@keyframes reelBounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+.spinning-fast {
+    animation: reelSpin 0.1s linear infinite;
+}
+
+.spinning-slow {
+    animation: reelSpinSlow 0.3s linear infinite;
+}
+
+.bouncing {
+    animation: reelBounce 0.6s ease-out;
+}
+
+/* 响应式设计 */
+@media (max-width: 1400px) {
+    .slot-machines {
+        gap: clamp(10px, 2.5vw, 25px);
+    }
+    
+    .slot-machine {
+        max-width: 350px;
+        min-width: 260px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .slot-machines {
+        gap: clamp(8px, 2vw, 20px);
+    }
+    
+    .slot-machine {
+        max-width: 320px;
+        min-width: 240px;
+    }
+}
+
+@media (max-width: 900px) {
+    .slot-machines {
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(15px, 3vw, 25px);
+    }
+    
+    .slot-machine {
+        width: 90%;
+        max-width: 450px;
+        min-width: 280px;
+    }
+    
+    .balance-display {
+        padding: clamp(10px, 2vw, 15px) clamp(20px, 4vw, 30px);
+    }
+    
+    .coin-counter {
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
+        gap: clamp(5px, 1vw, 10px);
+    }
+    
+    .info-panel {
+        width: 95%;
+        margin: 30px auto 0;
+        gap: 20px;
+    }
+    
+    .paytable {
+        grid-template-columns: 1fr;
+    }
+    
+    .rules {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .info-panel {
+        width: 98%;
+        margin: 20px auto 0;
+        gap: 15px;
+    }
+    
+    .paytable-container,
+    .rules-container {
+        padding: 15px;
+    }
+    
+    .paytable {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 12px;
+    }
+    
+    .pay-row {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+    
+    .rules {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 12px;
+    }
+    
+    .rules p {
+        font-size: 13px;
+        padding: 6px;
+    }
+    
+    .paytable-title,
+    .rules-title {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+}
+
+/* 背景粒子效果 */
+.casino-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #ffd700, transparent),
+        radial-gradient(2px 2px at 40px 70px, #ff6b6b, transparent),
+        radial-gradient(1px 1px at 90px 40px, #4ecdc4, transparent),
+        radial-gradient(1px 1px at 130px 80px, #45b7d1, transparent),
+        radial-gradient(2px 2px at 160px 30px, #96ceb4, transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: sparkle 20s linear infinite;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+@keyframes sparkle {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-100px); }
+}
+
+/* 增强的悬停效果 */
+.slot-machine:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(255, 215, 0, 0.4),
+        inset 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+.slot-machine:hover .machine-label {
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        padding: clamp(5px, 2vw, 10px);
+    }
+    
+    .neon-title {
+        font-size: clamp(2rem, 8vw, 3.5rem);
+    }
+    
+    .slot-machine {
+        margin: clamp(5px, 2vw, 10px) 0;
+        width: 95%;
+        max-width: none;
+    }
+    
+    .reel-wrapper {
+        max-width: clamp(50px, 10vw, 70px);
+    }
+    
+    .reel {
+        height: clamp(60px, 12vw, 90px);
+        font-size: clamp(1.2rem, 3vw, 2rem);
+    }
+    
+    .spin-btn {
+        padding: clamp(6px, 1.5vw, 10px) clamp(12px, 3vw, 20px);
+        font-size: clamp(0.7rem, 1.8vw, 1rem);
+    }
+    
+    .lever {
+        width: clamp(35px, 7vw, 50px);
+        height: clamp(50px, 8vw, 70px);
+    }
+    
+    .info-panel {
+        flex-direction: column;
+        gap: clamp(15px, 3vw, 25px);
+        padding: 0 clamp(10px, 2vw, 20px);
+    }
+    
+    .paytable-container,
+    .rules-container {
+        width: 100%;
+        min-width: auto;
+    }
+}

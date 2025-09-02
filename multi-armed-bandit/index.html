@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic Slot Machine - Multi-Armed Bandit</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="casino-background">
+        <div class="neon-lights"></div>
+        <div class="game-container">
+            <div class="casino-header">
+                <h1 class="neon-title">🎰 多臂老虎机 🎰</h1>
+                <div class="balance-display">
+                    <div class="coin-counter">
+                        <span class="coin-icon">💰</span>
+                        <span class="balance-text">当前余额：</span>
+                        <span id="balance" class="balance-number">100</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slot-machines">
+                <div class="slot-machine" id="machine1">
+                    <div class="machine-frame">
+                        <div class="machine-top">
+                            <div class="neon-sign">MACHINE 1</div>
+                            <div class="jackpot-lights"></div>
+                        </div>
+                        <div class="slot-window">
+                            <div class="reels-container">
+                                <div class="reel-wrapper">
+                                    <div class="reel" id="reel1-1">
+                                        <div class="symbol-strip" id="strip1-1"></div>
+                                    </div>
+                                </div>
+                                <div class="reel-wrapper">
+                                    <div class="reel" id="reel1-2">
+                                        <div class="symbol-strip" id="strip1-2"></div>
+                                    </div>
+                                </div>
+                                <div class="reel-wrapper">
+                                    <div class="reel" id="reel1-3">
+                                        <div class="symbol-strip" id="strip1-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="machine-bottom">
+                            <div class="control-panel">
+                                <button class="spin-btn" data-arm="1">
+                                    <span class="btn-text">SPIN</span>
+                                    <div class="btn-glow"></div>
+                                </button>
+                                <div class="lever-container">
+                                    <div class="lever" id="lever1">
+                                        <div class="lever-handle"></div>
+                                        <div class="lever-base"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-display" id="result1"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slot-machine" id="machine2">
+                    <div class="machine-frame">
+                        <div class="machine-top">
+                            <div class="neon-sign">MACHINE 2</div>
+                            <div class="jackpot-lights"></div>
+                        </div>
+                        <div class="slot-window">
+                            <div class="reels-container">
+                                <div class="reel-wrapper">
+                                    <div class="reel" id="reel2-1">
+                                        <div class="symbol-strip" id="strip2-1"></div>
+                                    </div>
+                                </div>
+                                <div class="reel-wrapper">
+                                    <div class="reel" id="reel2-2">
+                                        <div class="symbol-strip" id="strip2-2"></div>
+                                    </div>
+                                </div>
+                                <div class="reel-wrapper">
+                                    <div class="reel" id="reel2-3">
+                                        <div class="symbol-strip" id="strip2-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="machine-bottom">
+                            <div class="control-panel">
+                                <button class="spin-btn" data-arm="2">
+                                    <span class="btn-text">SPIN</span>
+                                    <div class="btn-glow"></div>
+                                </button>
+                                <div class="lever-container">
+                                    <div class="lever" id="lever2">
+                                        <div class="lever-handle"></div>
+                                        <div class="lever-base"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-display" id="result2"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slot-machine" id="machine3">
+                    <div class="machine-frame">
+                        <div class="machine-top">
+                            <div class="neon-sign">MACHINE 3</div>
+                            <div class="jackpot-lights"></div>
+                        </div>
+                        <div class="slot-window">
+                            <div class="reels-container">
+                                <div class="reel-wrapper">
+                                    <div class="reel" id="reel3-1">
+                                        <div class="symbol-strip" id="strip3-1"></div>
+                                    </div>
+                                </div>
+                                <div class="reel-wrapper">
+                                    <div class="reel" id="reel3-2">
+                                        <div class="symbol-strip" id="strip3-2"></div>
+                                    </div>
+                                </div>
+                                <div class="reel-wrapper">
+                                    <div class="reel" id="reel3-3">
+                                        <div class="symbol-strip" id="strip3-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="machine-bottom">
+                            <div class="control-panel">
+                                <button class="spin-btn" data-arm="3">
+                                    <span class="btn-text">SPIN</span>
+                                    <div class="btn-glow"></div>
+                                </button>
+                                <div class="lever-container">
+                                    <div class="lever" id="lever3">
+                                        <div class="lever-handle"></div>
+                                        <div class="lever-base"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-display" id="result3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        <!-- 信息面板 -->
+        <div class="info-panel">
+            <!-- 赔付表 -->
+            <div class="paytable-container">
+                <h3 class="paytable-title">💰 赔付表</h3>
+                <div class="paytable">
+                    <div class="pay-row special">
+                        <span class="symbols">7️⃣ 7️⃣ 7️⃣</span>
+                        <span class="payout">+150 金币</span>
+                    </div>
+                    <div class="pay-row special">
+                        <span class="symbols">💎 💎 💎</span>
+                        <span class="payout">+60 金币</span>
+                    </div>
+                    <div class="pay-row">
+                        <span class="symbols">🔔 🔔 🔔</span>
+                        <span class="payout">+30 金币</span>
+                    </div>
+                    <div class="pay-row">
+                        <span class="symbols">🍇 🍇 🍇</span>
+                        <span class="payout">+15 金币</span>
+                    </div>
+                    <div class="pay-row">
+                        <span class="symbols">🍊 🍊 🍊</span>
+                        <span class="payout">+12 金币</span>
+                    </div>
+                    <div class="pay-row">
+                        <span class="symbols">🍋 🍋 🍋</span>
+                        <span class="payout">+9 金币</span>
+                    </div>
+                    <div class="pay-row">
+                        <span class="symbols">🍒 🍒 🍒</span>
+                        <span class="payout">+6 金币</span>
+                    </div>
+                    <div class="pay-separator"></div>
+                    <div class="pay-row">
+                        <span class="symbols">任意两个相同</span>
+                        <span class="payout">符号价值 × 1</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 游戏规则 -->
+            <div class="rules-container">
+                <h3 class="rules-title">📋 游戏规则</h3>
+                <div class="rules">
+                    <p><strong>🎯 游戏目标：</strong>转动转轮，匹配相同符号获得奖励</p>
+                    <p><strong>💰 游戏费用：</strong>每次旋转消耗 5 金币</p>
+                    <p><strong>🎰 操作方式：</strong>点击旋转按钮或拉动拉杆开始游戏</p>
+                    <p><strong>🏆 获胜条件：</strong></p>
+                    <p>• 三个相同符号：获得符号价值 × 3 倍奖励</p>
+                    <p>• 两个相同符号：获得符号价值 × 1 倍奖励</p>
+                    <p><strong>🎲 特殊说明：</strong></p>
+                    <p>• 每台老虎机有不同的符号概率分布</p>
+                    <p>• 高价值符号出现概率较低但奖励丰厚</p>
+                    <p>• 合理选择老虎机可提高获胜几率</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
