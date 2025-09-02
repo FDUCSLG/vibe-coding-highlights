@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #000;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #fff;
+}
+
+.game-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+.game-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    max-width: 600px;
+}
+
+.game-board {
+    border: 2px solid #fff;
+    background-color: #000;
+}
+
+.info-panel {
+    background-color: #000;
+    border: 2px solid #fff;
+    padding: 15px;
+    color: #fff;
+    width: 180px;
+    font-size: 14px;
+}
+
+.score-display {
+    margin-bottom: 15px;
+}
+
+.score-display div {
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.next-piece {
+    margin: 15px 0;
+}
+
+.next-piece h3 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.next-canvas {
+    border: 1px solid #fff;
+    background-color: #000;
+    display: block;
+    margin: 0 auto;
+}
+
+.controls {
+    margin-top: 15px;
+}
+
+.controls h3 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.control-item {
+    margin: 3px 0;
+    font-size: 12px;
+}
+
+.pause-btn {
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 8px 16px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    width: 100%;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+.pause-btn:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.game-over {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #000;
+    border: 3px solid #fff;
+    color: #fff;
+    padding: 30px;
+    text-align: center;
+    display: none;
+    z-index: 1000;
+    font-family: 'Courier New', monospace;
+}
+
+.game-over h2 {
+    color: #fff;
+    margin: 0 0 20px 0;
+    font-size: 24px;
+}
+
+.restart-btn {
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 12px 24px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+.restart-btn:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .info-panel {
+        width: 300px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .score-display {
+        flex: 1;
+        margin-right: 10px;
+    }
+    
+    .next-piece {
+        flex: 1;
+        margin: 0;
+    }
+    
+    .controls {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

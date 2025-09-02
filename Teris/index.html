@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>俄罗斯方块游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-title">俄罗斯方块</div>
+    
+    <div class="game-container">
+        <canvas id="gameCanvas" class="game-board" width="300" height="600"></canvas>
+        
+        <div class="info-panel">
+            <div class="score-display">
+                <div>分数: <span id="score">0</span></div>
+                <div>等级: <span id="level">1</span></div>
+                <div>行数: <span id="lines">0</span></div>
+            </div>
+            
+            <button id="pauseBtn" class="pause-btn">暂停</button>
+            
+            <div class="next-piece">
+                <h3>下一个方块</h3>
+                <canvas id="nextCanvas" class="next-canvas" width="120" height="120"></canvas>
+            </div>
+            
+            <div class="controls">
+                <h3>操作说明</h3>
+                <div class="control-item">← → : 左右移动</div>
+                <div class="control-item">↓ : 快速下降</div>
+                <div class="control-item">↑ : 旋转</div>
+                <div class="control-item">空格 : 暂停/继续</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gameOver" class="game-over">
+        <h2>游戏结束!</h2>
+        <p>最终分数: <span id="finalScore">0</span></p>
+        <p>最终等级: <span id="finalLevel">1</span></p>
+        <button class="restart-btn" onclick="restartGame()">重新开始</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
