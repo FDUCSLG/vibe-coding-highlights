@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算机知识问答</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div id="start-screen" class="screen active">
+            <div class="main-layout">
+                <div class="logo-section">
+                    <img src="fducslg.png" alt="FDUCSLG Logo" class="logo-image">
+                </div>
+                <div class="content-section">
+                    <div class="intro-content">
+                        <h1>计算机知识问答</h1>
+                        <p>一共5道题，满分100分</p>
+                        <button id="start-btn" class="btn btn-primary">开始答题</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div class="container">
+                <div class="game-header">
+                    <div class="progress">
+                        <span id="current-question">1</span> / <span id="total-questions">5</span>
+                    </div>
+                    <div class="score-display">
+                        当前分数: <span id="current-score">0</span>
+                    </div>
+                </div>
+
+                <div class="question-container">
+                    <h3 id="question-text">题目内容</h3>
+                    <div id="options-container" class="options">
+                        <!-- 选项将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button id="next-btn" class="btn btn-secondary" disabled>下一题</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="result-screen" class="screen">
+            <div class="container">
+                <div class="result-content">
+                    <h2>🎉 答题完成！</h2>
+                    <div class="final-score">
+                        <h3>你的最终分数</h3>
+                        <div class="score-number" id="final-score">0</div>
+                        <div class="score-text" id="score-text">继续加油！</div>
+                    </div>
+                    <div class="score-breakdown">
+                        <h4>答题详情</h4>
+                        <div id="score-breakdown"></div>
+                    </div>
+                    <div class="result-actions">
+                        <button id="restart-btn" class="btn btn-primary">再来一次</button>
+                        <button id="back-to-start-btn" class="btn btn-secondary">返回首页</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

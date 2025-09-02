@@ -1,0 +1,529 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    color: #333;
+    background: #f8f9fa;
+}
+
+/* 应用容器 */
+.app-container {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 主屏幕样式 - 蓝白分界背景 */
+#start-screen {
+    min-height: 100vh;
+    position: relative;
+    background: linear-gradient(135deg, 
+        transparent 0%, 
+        transparent 45%, 
+        #4285f4 45%, 
+        #4285f4 100%
+    );
+    background-color: white;
+}
+
+#start-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(65deg, 
+        #ffffff 0%, 
+        #ffffff 45%, 
+        #1a73e8 45%, 
+        #1a73e8 100%
+    );
+    z-index: 0;
+}
+
+/* 主布局 */
+.main-layout {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* Logo区域 */
+.logo-section {
+    flex: 0 0 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 200px;
+}
+
+.logo-image {
+    max-width: 100%;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+}
+
+/* 内容区域 */
+.content-section {
+    flex: 0 0 50%;
+    padding-left: 150px;
+    color: white;
+}
+
+.intro-content h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
+}
+
+.intro-content > p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    opacity: 0.95;
+    line-height: 1.5;
+}
+
+/* 按钮样式 */
+.btn {
+    padding: 18px 36px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    min-width: 160px;
+    font-family: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #ffffff, #f0f8ff);
+    color: #1a73e8;
+    border: 2px solid #1b71f9;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.6);
+    background: #ffffff;
+}
+
+.btn-secondary {
+    background: #1a73e8;
+    color: white;
+    border: 2px solid #1a73e8;
+}
+
+.btn-secondary:hover {
+    background: #1557b0;
+    border-color: #1557b0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(26, 115, 232, 0.4);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 通用屏幕样式 */
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* 游戏和结果页面容器 */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+    min-height: 100vh;
+    background: white;
+}
+
+/* 游戏屏幕样式 */
+#game-screen {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e3f2fd 100%);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 25px 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(26, 115, 232, 0.1);
+}
+
+.progress {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a73e8;
+}
+
+.score-display {
+    font-size: 1.2rem;
+    color: #1a73e8;
+    font-weight: 600;
+}
+
+.question-container {
+    margin-bottom: 40px;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(26, 115, 232, 0.1);
+}
+
+.question-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: #333;
+    line-height: 1.6;
+    font-weight: 600;
+}
+
+.question-header {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.difficulty-badge {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.difficulty-badge.easy {
+    background: linear-gradient(45deg, #4caf50, #66bb6a);
+}
+
+.difficulty-badge.medium {
+    background: linear-gradient(45deg, #ff9800, #ffb74d);
+    color: #fff;
+}
+
+.difficulty-badge.hard {
+    background: linear-gradient(45deg, #f44336, #e57373);
+}
+
+.question-content {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.options {
+    display: grid;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.option {
+    padding: 20px 25px;
+    border: 2px solid #e8f0fe;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    background: #fafbff;
+    position: relative;
+    user-select: none;
+}
+
+.option:hover {
+    border-color: #4285f4;
+    background: #e8f0fe;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(66, 133, 244, 0.2);
+}
+
+.option.selected {
+    border-color: #1a73e8;
+    background: #e8f0fe;
+}
+
+.option.correct {
+    border-color: #34a853;
+    background: #e8f5e8;
+}
+
+.option.incorrect {
+    border-color: #ea4335;
+    background: #fce8e6;
+}
+
+.option input[type="radio"] {
+    margin-right: 12px;
+    transform: scale(1.3);
+    cursor: pointer;
+    accent-color: #1a73e8;
+}
+
+.option label {
+    cursor: pointer;
+    flex: 1;
+    margin-left: 5px;
+    font-size: 1.1rem;
+    line-height: 1.4;
+}
+
+.game-controls {
+    text-align: center;
+}
+
+/* 结果页面样式 */
+#result-screen {
+    background: linear-gradient(135deg, #e8f0fe 0%, #f0f8ff 100%);
+}
+
+.result-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #1a73e8;
+    font-weight: 700;
+}
+
+.final-score {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.final-score h3 {
+    font-size: 1.4rem;
+    color: #666;
+}
+
+.score-number {
+    font-size: 5rem;
+    font-weight: 800;
+    background: linear-gradient(45deg, #1a73e8, #4285f4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+}
+
+.score-text {
+    font-size: 1.3rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.score-breakdown {
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+.score-breakdown h4 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 600;
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-bottom: 1px solid #e8f0fe;
+}
+
+.breakdown-item:last-child {
+    border-bottom: none;
+}
+
+.question-result {
+    flex: 1;
+    text-align: left;
+}
+
+.result-icon {
+    font-size: 1.3rem;
+    margin-right: 12px;
+}
+
+.result-details {
+    text-align: right;
+    min-width: 120px;
+}
+
+.correct-answer {
+    font-size: 0.9rem;
+    color: #34a853;
+    font-weight: 600;
+    margin-top: 8px;
+    padding: 5px 12px;
+    background: #e8f5e8;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+.explanation {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 3px solid #1a73e8;
+    line-height: 1.4;
+}
+
+.correct-icon {
+    color: #34a853;
+}
+
+.incorrect-icon {
+    color: #ea4335;
+}
+
+.result-actions {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .main-layout {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .logo-section, .content-section {
+        flex: none;
+        width: 100%;
+        padding: 0;
+    }
+    
+    .logo-section {
+        margin-bottom: 40px;
+    }
+    
+    .logo-image {
+        max-height: 200px;
+    }
+    
+    .intro-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    #start-screen::before {
+        background: linear-gradient(180deg, 
+            #ffffff 0%, 
+            #ffffff 50%, 
+            #1a73e8 50%, 
+            #1a73e8 100%
+        );
+    }
+}
+
+@media (max-width: 768px) {
+    .main-layout {
+        padding: 15px;
+    }
+    
+    .container {
+        padding: 20px 15px;
+    }
+    
+    .intro-content h1 {
+        font-size: 2rem;
+    }
+    
+    .intro-content > p {
+        font-size: 1.1rem;
+    }
+    
+    .intro-description h2 {
+        font-size: 1.5rem;
+    }
+    
+    .game-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .question-container {
+        padding: 25px 20px;
+    }
+    
+    .question-container h3 {
+        font-size: 1.3rem;
+    }
+    
+    .option {
+        padding: 15px 20px;
+    }
+    
+    .option label {
+        font-size: 1rem;
+    }
+    
+    .score-number {
+        font-size: 4rem;
+    }
+    
+    .result-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 300px;
+        margin: 5px 0;
+    }
+    
+    .logo-image {
+        max-height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .question-container h3 {
+        font-size: 1.2rem;
+    }
+    
+    .score-number {
+        font-size: 3.5rem;
+    }
+}
