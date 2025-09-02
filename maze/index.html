@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迷宫冒险 - 避开活动墙壁</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>迷宫冒险</h1>
+            <div class="game-info">
+                <span>时间: <span id="timer">0</span>秒</span>
+                <span>生命: <span id="lives">3</span></span>
+                <span>分数: <span id="score">0</span></span>
+            </div>
+        </div>
+        
+        <div class="game-area">
+            <canvas id="gameCanvas" width="800" height="500"></canvas>
+            
+            <div class="controls">
+                <p>使用方向键或WASD移动</p>
+                <button id="startBtn">开始游戏</button>
+                <button id="restartBtn">重新开始</button>
+            </div>
+        </div>
+        
+        <div class="game-over" id="gameOver" style="display: none;">
+            <div class="game-over-content">
+                <h2 id="gameOverTitle">游戏结束</h2>
+                <p id="gameOverMessage"></p>
+                <button id="playAgainBtn">再玩一次</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Press Start 2P', 'Noto Sans SC', sans-serif;
+    background: #1a1a1a;
+    background-image: 
+        radial-gradient(circle at 25% 25%, #2d2d2d 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, #2d2d2d 2px, transparent 2px);
+    background-size: 20px 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #00ff00;
+}
+
+.game-container {
+    background: #000000;
+    border: 4px solid #00ff00;
+    border-radius: 0;
+    box-shadow: 
+        0 0 20px #00ff00,
+        inset 0 0 20px rgba(0, 255, 0, 0.1);
+    padding: 30px;
+    max-width: 900px;
+    width: 100%;
+    position: relative;
+}
+
+.game-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.game-header h1 {
+    font-size: 2em;
+    color: #00ff00;
+    margin-bottom: 20px;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 
+            0 0 10px #00ff00,
+            0 0 20px #00ff00,
+            0 0 30px #00ff00;
+    }
+    to {
+        text-shadow: 
+            0 0 5px #00ff00,
+            0 0 10px #00ff00,
+            0 0 15px #00ff00;
+    }
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-around;
+    background: #000000;
+    border: 2px solid #00ff00;
+    padding: 15px;
+    border-radius: 0;
+    color: #00ff00;
+    font-weight: normal;
+    font-size: 0.8em;
+    box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+.game-info span {
+    padding: 5px 15px;
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid #00ff00;
+    border-radius: 0;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#gameCanvas {
+    border: 3px solid #00ff00;
+    border-radius: 0;
+    background: #000000;
+    box-shadow: 
+        0 0 20px #00ff00,
+        inset 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.controls {
+    text-align: center;
+    background: #000000;
+    padding: 20px;
+    border-radius: 0;
+    border: 2px solid #00ff00;
+    box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+.controls p {
+    margin-bottom: 15px;
+    color: #00ff00;
+    font-weight: normal;
+    font-size: 0.7em;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+button {
+    background: #000000;
+    color: #00ff00;
+    border: 2px solid #00ff00;
+    padding: 12px 25px;
+    margin: 0 10px;
+    border-radius: 0;
+    font-size: 0.7em;
+    font-family: 'Press Start 2P', monospace;
+    font-weight: normal;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 0 10px #00ff00,
+        inset 0 0 10px rgba(0, 255, 0, 0.1);
+    text-shadow: 0 0 5px #00ff00;
+}
+
+button:hover {
+    background: rgba(0, 255, 0, 0.1);
+    box-shadow: 
+        0 0 20px #00ff00,
+        inset 0 0 20px rgba(0, 255, 0, 0.2);
+    text-shadow: 0 0 10px #00ff00;
+}
+
+button:active {
+    background: rgba(0, 255, 0, 0.2);
+}
+
+.game-over {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.game-over-content {
+    background: #000000;
+    border: 4px solid #00ff00;
+    padding: 40px;
+    border-radius: 0;
+    text-align: center;
+    box-shadow: 
+        0 0 30px #00ff00,
+        inset 0 0 20px rgba(0, 255, 0, 0.1);
+    max-width: 400px;
+    width: 90%;
+}
+
+.game-over-content h2 {
+    color: #ff0000;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    text-shadow: 
+        0 0 10px #ff0000,
+        0 0 20px #ff0000;
+    animation: redGlow 1s ease-in-out infinite alternate;
+}
+
+@keyframes redGlow {
+    from {
+        text-shadow: 
+            0 0 10px #ff0000,
+            0 0 20px #ff0000;
+    }
+    to {
+        text-shadow: 
+            0 0 5px #ff0000,
+            0 0 10px #ff0000;
+    }
+}
+
+.game-over-content p {
+    margin-bottom: 30px;
+    font-size: 0.6em;
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+    line-height: 1.5;
+}
+
+#playAgainBtn {
+    background: #000000;
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    font-size: 0.7em;
+    padding: 15px 30px;
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        padding: 20px;
+        margin: 20px;
+    }
+    
+    .game-header h1 {
+        font-size: 2em;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    #gameCanvas {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+    }
+}
