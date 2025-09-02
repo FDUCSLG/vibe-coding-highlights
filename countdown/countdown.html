@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新年倒计时</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #0c5dd7 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            to {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 120px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .time-unit:hover {
+            transform: scale(1.05);
+        }
+
+        .time-number {
+            font-size: 3rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .time-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .year-display {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+
+        .date-selector {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .date-selector label {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .date-input {
+            padding: 12px 15px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            min-width: 200px;
+        }
+
+        .date-input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .set-btn, .reset-btn {
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .set-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .set-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .reset-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .date-selector {
+                padding: 15px;
+            }
+            
+            .date-input {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .set-btn, .reset-btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+
+        .celebration {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: rainbow 2s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% { background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3); }
+            25% { background: linear-gradient(45deg, #feca57, #48dbfb, #ff9ff3, #ff6b6b); }
+            50% { background: linear-gradient(45deg, #48dbfb, #ff9ff3, #ff6b6b, #feca57); }
+            75% { background: linear-gradient(45deg, #ff9ff3, #ff6b6b, #feca57, #48dbfb); }
+            100% { background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3); }
+        }
+
+        .celebration-text {
+            font-size: 4rem;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .fireworks {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: firework 1s ease-out infinite;
+        }
+
+        @keyframes firework {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(20);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="title">🎊 倒计时器 🎊</h1>
+        
+        <!-- 日期选择器区域 -->
+        <div class="date-selector">
+            <label for="targetDate">选择目标日期：</label>
+            <input type="datetime-local" id="targetDate" class="date-input">
+            <button id="setCountdown" class="set-btn">设置倒计时</button>
+            <button id="resetToNewYear" class="reset-btn">重置为新年</button>
+        </div>
+        
+        <div class="countdown" id="countdown">
+            <div class="time-unit">
+                <span class="time-number" id="days">00</span>
+                <span class="time-label">天</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-number" id="hours">00</span>
+                <span class="time-label">小时</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-number" id="minutes">00</span>
+                <span class="time-label">分钟</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-number" id="seconds">00</span>
+                <span class="time-label">秒</span>
+            </div>
+        </div>
+        <div class="year-display" id="yearDisplay">距离 2025 年还有...</div>
+    </div>
+
+    <div class="celebration" id="celebration">
+        <div class="celebration-text">🎉 新年快乐！🎉</div>
+    </div>
+
+    <script>
+        let targetDate = null;
+        let countdownInterval = null;
+        
+        // 获取默认的新年日期
+        function getDefaultNewYearDate() {
+            const currentYear = new Date().getFullYear();
+            const nextYear = currentYear + 1;
+            return new Date(`January 1, ${nextYear} 00:00:00`);
+        }
+        
+        // 验证日期是否在未来
+        function isDateInFuture(date) {
+            return date > new Date();
+        }
+        
+        // 格式化日期显示
+        function formatDateDisplay(date) {
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric', 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            };
+            return date.toLocaleDateString('zh-CN', options);
+        }
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const target = targetDate || getDefaultNewYearDate();
+            const targetTime = target.getTime();
+            
+            const distance = targetTime - now;
+            
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+                
+                // 更新显示文本
+                if (targetDate) {
+                    document.getElementById('yearDisplay').textContent = `距离 ${formatDateDisplay(target)} 还有...`;
+                } else {
+                    document.getElementById('yearDisplay').textContent = `距离 ${target.getFullYear()} 年还有...`;
+                }
+            } else {
+                // 倒计时结束！
+                document.getElementById('celebration').style.display = 'flex';
+                document.querySelector('.celebration-text').textContent = targetDate ? '🎉 时间到了！🎉' : '🎉 新年快乐！🎉';
+                createFireworks();
+                
+                // 5秒后重置
+                setTimeout(() => {
+                    document.getElementById('celebration').style.display = 'none';
+                    if (!targetDate) {
+                        // 如果是新年倒计时，自动设置为下一年
+                        updateCountdown();
+                    }
+                }, 5000);
+            }
+        }
+        
+        function createFireworks() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.className = 'fireworks';
+                    firework.style.left = Math.random() * 100 + '%';
+                    firework.style.top = Math.random() * 100 + '%';
+                    firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    document.getElementById('celebration').appendChild(firework);
+                    
+                    setTimeout(() => {
+                        firework.remove();
+                    }, 1000);
+                }, i * 100);
+            }
+        }
+        
+        // 设置倒计时目标日期
+        function setCustomCountdown() {
+            const dateInput = document.getElementById('targetDate');
+            const selectedDate = new Date(dateInput.value);
+            
+            if (!dateInput.value) {
+                alert('请选择一个日期！');
+                return;
+            }
+            
+            if (!isDateInFuture(selectedDate)) {
+                alert('请选择一个未来的日期！');
+                return;
+            }
+            
+            targetDate = selectedDate;
+            document.getElementById('title').textContent = '🎯 自定义倒计时 🎯';
+            updateCountdown();
+        }
+        
+        // 重置为新年倒计时
+        function resetToNewYear() {
+            targetDate = null;
+            document.getElementById('targetDate').value = '';
+            document.getElementById('title').textContent = '🎊 新年倒计时 🎊';
+            updateCountdown();
+        }
+        
+        // 初始化事件监听器
+        function initEventListeners() {
+            document.getElementById('setCountdown').addEventListener('click', setCustomCountdown);
+            document.getElementById('resetToNewYear').addEventListener('click', resetToNewYear);
+            
+            // 回车键快速设置
+            document.getElementById('targetDate').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    setCustomCountdown();
+                }
+            });
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initEventListeners();
+            
+            // 设置日期输入框的最小值为当前时间
+            const now = new Date();
+            const minDateTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+            document.getElementById('targetDate').min = minDateTime;
+            
+            // 立即更新一次
+            updateCountdown();
+            
+            // 每秒更新
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            countdownInterval = setInterval(updateCountdown, 1000);
+        });
+        
+        // 兼容性：如果DOMContentLoaded已经触发，直接执行
+        if (document.readyState === 'loading') {
+            // 文档还在加载中
+        } else {
+            // 文档已经加载完成
+            initEventListeners();
+            const now = new Date();
+            const minDateTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+            document.getElementById('targetDate').min = minDateTime;
+            updateCountdown();
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+    </script>
+</body>
+</html>
