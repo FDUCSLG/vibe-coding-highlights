@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome恐龙小游戏</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .game-container {
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        #gameCanvas {
+            border: 2px solid #ddd;
+            background-color: #f7f7f7;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .game-info {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        .score {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .instructions {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            display: none;
+        }
+        
+        .game-over h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .restart-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .restart-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Chrome恐龙小游戏</h1>
+        <canvas id="gameCanvas" width="1200" height="300"></canvas>
+        <div class="game-info">
+            <div class="score">得分: <span id="score">0</span></div>
+            <div class="instructions">长按空格键蓄力跳跃，按↓键或S键在空中快速下落！</div>
+        </div>
+    </div>
+    
+    <div class="game-over" id="gameOver">
+        <h2>游戏结束!</h2>
+        <div class="score">最终得分: <span id="finalScore">0</span></div>
+        <button class="restart-btn" onclick="restartGame()">重新开始</button>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
