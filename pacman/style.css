@@ -1,0 +1,63 @@
+* {
+    font-family: 'Noto Sans SC', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #ffff00;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#gameCanvas {
+    border: 2px solid #0000ff;
+    background-color: #000;
+}
+
+#gameInfo {
+    margin-top: 20px;
+    display: flex;
+    gap: 30px;
+    font-size: 18px;
+}
+
+#controls {
+    margin-top: 15px;
+    text-align: center;
+    color: #ccc;
+}
+
+.game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border: 2px solid #ffff00;
+    text-align: center;
+    display: none;
+}
+
+button {
+    background-color: #ffff00;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #fff;
+}
