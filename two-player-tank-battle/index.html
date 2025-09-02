@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>坦克大战</title>
+    <style>
+        * {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-height: 100vh;
+        }
+
+        h1 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        #gameCanvas {
+            border: 3px solid #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            background: #87CEEB;
+        }
+
+        .controls {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .player-controls {
+            display: inline-block;
+            margin: 0 20px;
+            text-align: left;
+        }
+
+        .player-controls h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .controls p {
+            margin: 8px;
+            color: #555;
+        }
+
+        #gameStatus {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .restart-btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .restart-btn:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🚗 坦克大战 🚗</h1>
+    <canvas id="gameCanvas" width="800" height="500"></canvas>
+
+    <div class="controls">
+        <div class="player-controls">
+            <h3>🔵 玩家1 (蓝色坦克)</h3>
+            <p>移动: W/A/S/D</p>
+            <p>射击: 空格键</p>
+            <h3>🔴 玩家2 (红色坦克)</h3>
+            <p>移动: ↑/←/↓/→</p>
+            <p>射击: Enter键</p>
+        </div>
+        <div class="player-controls">
+            <h3>✨ 游戏特色</h3>
+            <p>🔄 子弹可反射2次</p>
+            <p>💨 反射后速度递减</p>
+            <p>⭐ 反射时产生粒子特效</p>
+            <p>❤️ 每5秒生成血包</p>
+            <p>🩹 捡血包回复1点生命</p>
+        </div>
+    </div>
+
+    <div id="gameStatus">准备开始游戏！</div>
+    <button class="restart-btn" onclick="restartGame()">重新开始</button>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
