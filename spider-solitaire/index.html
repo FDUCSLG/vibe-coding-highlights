@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蜘蛛纸牌游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>蜘蛛纸牌</h1>
+            <div class="game-controls">
+                <button id="new-game-btn" class="btn">新游戏</button>
+                <button id="deal-btn" class="btn">发牌</button>
+                <button id="hint-btn" class="btn">提示</button>
+                <div class="score">得分: <span id="score">500</span></div>
+            </div>
+        </header>
+
+        <div class="game-board">
+            <!-- 基础堆区域 -->
+            <div class="foundation-area">
+                <div class="foundation-stack" id="foundation-0"></div>
+                <div class="foundation-stack" id="foundation-1"></div>
+                <div class="foundation-stack" id="foundation-2"></div>
+                <div class="foundation-stack" id="foundation-3"></div>
+            </div>
+
+            <!-- 游戏区域 -->
+            <div class="main-game-area">
+                <div class="tableau-area">
+                    <div class="tableau-column" id="column-0"></div>
+                    <div class="tableau-column" id="column-1"></div>
+                    <div class="tableau-column" id="column-2"></div>
+                    <div class="tableau-column" id="column-3"></div>
+                    <div class="tableau-column" id="column-4"></div>
+                    <div class="tableau-column" id="column-5"></div>
+                    <div class="tableau-column" id="column-6"></div>
+                    <div class="tableau-column" id="column-7"></div>
+                    <div class="tableau-column" id="column-8"></div>
+                    <div class="tableau-column" id="column-9"></div>
+                </div>
+                
+                <!-- 空槽中转区域 -->
+                <div class="empty-slots-area">
+                    <div class="empty-slot-label">中转区</div>
+                    <div class="empty-slot" id="empty-slot-0">
+                        <div class="empty-slot-placeholder">空槽 1</div>
+                    </div>
+                    <div class="empty-slot" id="empty-slot-1">
+                        <div class="empty-slot-placeholder">空槽 2</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 发牌堆 -->
+            <div class="stock-area">
+                <div class="stock-pile" id="stock">
+                    <div class="stock-counter">剩余: <span id="stock-count">50</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
