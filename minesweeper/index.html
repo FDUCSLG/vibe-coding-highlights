@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扫雷游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>扫雷游戏</h1>
+        
+        <div class="game-info">
+            <div class="info-item">
+                <span class="label">地雷数量:</span>
+                <span id="mine-count">10</span>
+            </div>
+            <div class="info-item">
+                <span class="label">时间:</span>
+                <span id="timer">000</span>
+            </div>
+            <button id="restart-btn" class="restart-btn">重新开始</button>
+        </div>
+        
+        <div class="game-status" id="game-status">
+            <span id="status-text">点击开始游戏</span>
+        </div>
+        
+        <div class="game-board" id="game-board">
+            <!-- 游戏网格将通过JavaScript动态生成 -->
+        </div>
+        
+        <div class="game-controls">
+            <div class="difficulty">
+                <label>难度选择:</label>
+                <select id="difficulty-select">
+                    <option value="easy">简单 (9x9, 10雷)</option>
+                    <option value="medium">中等 (16x16, 40雷)</option>
+                    <option value="hard">困难 (16x30, 99雷)</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>游戏说明:</h3>
+            <ul>
+                <li>左键点击揭开格子</li>
+                <li>右键点击标记/取消标记地雷</li>
+                <li>双击数字格子：当周围标记的地雷数等于数字时，自动揭开周围未标记的格子</li>
+                <li>数字表示周围8个格子中地雷的数量</li>
+                <li>找出所有地雷即可获胜</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
